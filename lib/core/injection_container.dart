@@ -15,7 +15,7 @@ Future<void> setupLocator() async {
   sl.registerLazySingleton(() => http.Client());
 
   // DATA
-  sl.registerLazySingleton(() => UsersRepositoryImpl());
+  sl.registerLazySingleton(() => UsersRepositoryImpl(sl<http.Client>()));
 
   // DOMAIN
   sl.registerLazySingleton(() => GetUsers(sl<UsersRepositoryImpl>()));

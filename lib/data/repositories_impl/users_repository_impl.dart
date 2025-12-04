@@ -8,12 +8,16 @@ import 'package:users_bloc_demo/domain/repositories/users_repository.dart';
 import 'package:http/http.dart' as http;
 
 class UsersRepositoryImpl implements UsersRepository {
+  final http.Client client;
+
+  UsersRepositoryImpl(this.client);
+
   @override
   Future<List<UserEntity>> fetchUsers() async {
     try {
       final url = Uri.parse("https://jsonplaceholder.typicode.com/users");
 
-      final response = await http.get(url);
+      final response = await client.get(url);
       HttpValidator.validateResponse(response);
       final List<dynamic> decodedJson = json.decode(response.body);
       final users = decodedJson
