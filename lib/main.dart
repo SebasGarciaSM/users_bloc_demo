@@ -39,11 +39,6 @@ class MyApp extends StatelessWidget {
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
       routerConfig: _router,
-
-      // home: BlocProvider(
-      //   create: (_) => sl<UsersCubit>()..loadUsers(),
-      //   child: const UserDetailsPage(),
-      // ),
     );
   }
 }
