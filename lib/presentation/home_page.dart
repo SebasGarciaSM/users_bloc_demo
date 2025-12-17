@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:users_bloc_demo/presentation/cubit/users_cubit.dart';
 
 class HomePage extends StatelessWidget {
@@ -27,6 +28,15 @@ class HomePage extends StatelessWidget {
                   title: Text(user.name),
                   subtitle: Text(user.email),
                   trailing: Icon(Icons.arrow_forward_ios),
+                  onTap: () {
+                    context.pushNamed(
+                      'user-details',
+                      pathParameters: {
+                        'id': user.id.toString(),
+                      },
+                      extra: user,
+                    );
+                  },
                 );
               },
             );

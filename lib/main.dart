@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:users_bloc_demo/core/injection_container.dart';
+import 'package:users_bloc_demo/domain/entities/user_entity.dart';
 import 'package:users_bloc_demo/presentation/cubit/users_cubit.dart';
 import 'package:users_bloc_demo/presentation/home_page.dart';
 import 'package:users_bloc_demo/presentation/user_details_page.dart';
@@ -21,11 +22,20 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
+        name: 'users',
         builder: (context, state) {
           return BlocProvider(
             create: (context) => sl<UsersCubit>()..loadUsers(),
             child: HomePage(),
           );
+        },
+      ),
+      GoRoute(
+        path: '/users/:id',
+        name: 'user-details',
+        builder: (context, state) {
+          final user = state.extra as UserEntity;
+          return UserDetailsPage(user: user);
         },
       ),
     ],
